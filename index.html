@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Convite · Aniversário da Tiffani</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=Cormorant:ital,wght@0,400;0,500;0,600;1,400&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --bg: #f7f3ff;
+            --card: #ffffff;
+            --ink: #33285a;
+            --muted: #7d7196;
+            --hint: #a99fc0;
+            --line: #ece4fb;
+            --lilac: #a78bfa;
+            --lilac-deep: #7c5cd6;
+            --lilac-ink: #5b3fa8;
+            --lilac-bg: #efe8ff;
+            --grape: #8b5cf6;
+            --radius: 12px;
+            --serif: 'Playfair Display', Georgia, serif;
+            --body: 'Cormorant', Georgia, serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--body);
+            background: var(--bg);
+            color: var(--ink);
+            min-height: 100vh;
+            line-height: 1.5;
+            overflow-x: hidden;
+            font-size: 18px;
+        }
+
+        #gate {
+            position: fixed;
+            inset: 0;
+            z-index: 100;
+            background: linear-gradient(160deg, #c4b5fd, #a78bfa 55%, #8b5cf6);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 24px;
+            transition: opacity .6s ease, visibility .6s ease;
+        }
+
+        #gate.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .gate-emoji {
+            font-size: 56px;
+            margin-bottom: 12px;
+            animation: bob 2s ease-in-out infinite;
+        }
+
+        @keyframes bob {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-12px);
+            }
+        }
+
+        .gate-title {
+            font-family: var(--serif);
+            font-size: 34px;
+            font-weight: 600;
+            color: #fff;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, .15);
+            margin-bottom: 6px;
+            letter-spacing: .5px;
+        }
+
+        .gate-sub {
+            font-size: 19px;
+            color: #fff;
+            opacity: .95;
+            margin-bottom: 28px;
+            font-style: italic;
+        }
+
+        .gate-btn {
+            background: #fff;
+            color: var(--lilac-ink);
+            border: none;
+            border-radius: 999px;
+            padding: 14px 36px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            font-family: var(--serif);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, .18);
+            animation: pulse 1.6s ease-in-out infinite;
+            letter-spacing: .3px;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.06);
+            }
+        }
+
+        .wrap {
+            max-width: 440px;
+            margin: 0 auto;
+            padding: 16px 16px 40px;
+            opacity: 0;
+            transition: opacity .8s ease .2s;
+        }
+
+        .wrap.show {
+            opacity: 1;
+        }
+
+        .hero {
+            background: var(--lilac-bg);
+            border-radius: 20px;
+            padding: 30px 22px 26px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid #e2d6fb;
+        }
+
+        .hero .conf {
+            position: absolute;
+            font-size: 20px;
+            opacity: .5;
+        }
+
+        .eyebrow {
+            font-family: var(--body);
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--lilac-deep);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 14px;
+        }
+
+        .flourish {
+            color: var(--lilac);
+            font-size: 20px;
+            margin: 6px 0 10px;
+            letter-spacing: 4px;
+        }
+
+        .hero h1 {
+            font-family: var(--serif);
+            font-size: 40px;
+            font-weight: 700;
+            line-height: 1.05;
+            margin-bottom: 8px;
+            letter-spacing: .5px;
+        }
+
+        .hero .who {
+            font-family: var(--body);
+            font-size: 19px;
+            color: var(--lilac-ink);
+            font-style: italic;
+        }
+
+        .invite {
+            background: var(--card);
+            border: 1px solid var(--line);
+            border-radius: 16px;
+            padding: 24px 22px;
+            margin: 16px 0;
+            text-align: center;
+        }
+
+        .invite p {
+            font-size: 20px;
+            color: var(--ink);
+            line-height: 1.6;
+        }
+
+        .sec-label {
+            font-family: var(--serif);
+            font-size: 15px;
+            color: var(--lilac-deep);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin: 0 4px 10px;
+            font-weight: 600;
+        }
+
+        .carousel {
+            margin: 0 0 6px;
+            border-radius: 18px;
+            overflow: hidden;
+            position: relative;
+            background: #ede6fb;
+            aspect-ratio: 4/3;
+        }
+
+        .slides {
+            display: flex;
+            height: 100%;
+            transition: transform .4s ease;
+        }
+
+        .slide {
+            min-width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .slide-ph {
+            min-width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            color: #a99fc0;
+            background: #ede6fb;
+            flex-direction: column;
+            gap: 8px;
+            font-family: var(--body);
+        }
+
+        .dots {
+            position: absolute;
+            bottom: 12px;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: center;
+            gap: 7px;
+        }
+
+        .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, .6);
+            cursor: pointer;
+        }
+
+        .dot.on {
+            background: #fff;
+            width: 22px;
+            border-radius: 999px;
+        }
+
+        .cnav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, .85);
+            border: none;
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            font-size: 20px;
+            cursor: pointer;
+            color: var(--ink);
+        }
+
+        .cprev {
+            left: 10px;
+        }
+
+        .cnext {
+            right: 10px;
+        }
+
+        .caption {
+            font-size: 17px;
+            color: var(--muted);
+            text-align: center;
+            min-height: 20px;
+            margin: 0 0 18px;
+            padding: 0 8px;
+            font-style: italic;
+        }
+
+        .player {
+            background: var(--card);
+            border: 1px solid var(--line);
+            border-radius: 16px;
+            padding: 14px 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin: 18px 0;
+        }
+
+        .pbtn {
+            background: var(--lilac);
+            color: #fff;
+            border: none;
+            width: 46px;
+            height: 46px;
+            border-radius: 50%;
+            font-size: 20px;
+            cursor: pointer;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .pinfo {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .ptrack {
+            font-family: var(--serif);
+            font-size: 17px;
+            font-weight: 600;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .plabel {
+            font-size: 13px;
+            color: var(--hint);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+        }
+
+        .pskip {
+            background: none;
+            border: none;
+            font-size: 22px;
+            cursor: pointer;
+            color: var(--muted);
+            flex-shrink: 0;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 18px;
+        }
+
+        .info {
+            background: var(--card);
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            padding: 16px;
+            text-align: center;
+        }
+
+        .info-label {
+            font-size: 13px;
+            color: var(--hint);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+        }
+
+        .info-value {
+            font-family: var(--serif);
+            font-size: 21px;
+            font-weight: 600;
+            margin-top: 5px;
+        }
+
+        .info-sub {
+            font-size: 16px;
+            color: var(--muted);
+            font-style: italic;
+        }
+
+        .cd-label {
+            text-align: center;
+            font-size: 14px;
+            color: var(--hint);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 12px;
+        }
+
+        .countdown {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 22px;
+        }
+
+        .cd-box {
+            background: var(--lilac);
+            border-radius: 14px;
+            padding: 14px 6px;
+            min-width: 72px;
+            text-align: center;
+        }
+
+        .cd-num {
+            font-family: var(--serif);
+            font-size: 30px;
+            font-weight: 700;
+            color: #fff;
+            line-height: 1;
+        }
+
+        .cd-unit {
+            font-size: 12px;
+            color: #fff;
+            opacity: .9;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-top: 6px;
+        }
+
+        .rsvp {
+            background: var(--card);
+            border: 1px solid var(--line);
+            border-radius: 16px;
+            padding: 22px 18px;
+            margin-bottom: 16px;
+        }
+
+        .rsvp-title {
+            font-family: var(--serif);
+            text-align: center;
+            font-size: 22px;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+
+        input {
+            width: 100%;
+            padding: 13px 14px;
+            font-size: 17px;
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            margin-bottom: 10px;
+            font-family: var(--body);
+            background: #fdfbff;
+            color: var(--ink);
+        }
+
+        input:focus {
+            outline: none;
+            border-color: var(--lilac);
+        }
+
+        .btn-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .bsim {
+            padding: 14px;
+            font-size: 17px;
+            font-weight: 600;
+            border: none;
+            border-radius: var(--radius);
+            background: var(--grape);
+            color: #fff;
+            cursor: pointer;
+            font-family: var(--serif);
+            letter-spacing: .3px;
+        }
+
+        .bnao {
+            padding: 14px;
+            font-size: 17px;
+            font-weight: 600;
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            background: #fff;
+            color: var(--muted);
+            cursor: pointer;
+            font-family: var(--serif);
+            letter-spacing: .3px;
+        }
+
+        .bsim:active,
+        .bnao:active {
+            transform: scale(.98);
+        }
+
+        .msg {
+            font-size: 17px;
+            text-align: center;
+            margin-top: 12px;
+            min-height: 22px;
+            color: var(--muted);
+            font-style: italic;
+        }
+
+        .map {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: var(--card);
+            border: 1px solid var(--line);
+            border-radius: 16px;
+            padding: 14px;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .map-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            background: var(--grape);
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            flex-shrink: 0;
+        }
+
+        .map-title {
+            font-family: var(--serif);
+            font-size: 17px;
+            font-weight: 600;
+        }
+
+        .map-sub {
+            font-size: 15px;
+            color: var(--muted);
+            font-style: italic;
+        }
+
+        audio {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="gate">
+        <div class="gate-emoji">💜</div>
+        <div class="gate-title">Você foi convidado</div>
+        <div class="gate-sub">toque para abrir o convite</div>
+        <button class="gate-btn" id="gateBtn">Abrir convite</button>
+    </div>
+
+    <div class="wrap" id="wrap">
+        <div class="hero">
+            <span class="conf" style="top:14px;left:18px;">✧</span>
+            <span class="conf" style="top:20px;right:20px;">✧</span>
+            <span class="conf" style="bottom:16px;left:26px;">✧</span>
+            <span class="conf" style="bottom:18px;right:24px;">✧</span>
+            <div class="eyebrow">Você está convidado</div>
+            <div class="flourish">— ✧ —</div>
+            <h1>Aniversário<br>da Tiffani</h1>
+            <div class="who">vem comemorar comigo</div>
+        </div>
+
+        <div class="invite">
+            <p>Oi! Estou fazendo mais uma volta ao sol e queria muito comemorar com vocês. Preparei um piquenique na
+                Praça do Chafariz, no Downtown, com música, sol e as pessoas que eu amo por perto. Não precisa levar
+                nada, a comida fica por minha conta — é só chegar (e trazer disposição pra curtir comigo)!</p>
+        </div>
+
+        <div class="sec-label">Um pouquinho de mim</div>
+        <div class="carousel">
+            <div class="slides" id="slidesA">
+                <img class="slide"
+                    src="https://ezppwkfdinbqsxvzucdf.supabase.co/storage/v1/object/public/piquenique/tiffani0.jpeg">
+                <img class="slide"
+                    src="https://ezppwkfdinbqsxvzucdf.supabase.co/storage/v1/object/public/piquenique/tiffani.jpeg">
+                <img class="slide"
+                    src="https://ezppwkfdinbqsxvzucdf.supabase.co/storage/v1/object/public/piquenique/tiffani1.jpeg">
+                <img class="slide"
+                    src="https://ezppwkfdinbqsxvzucdf.supabase.co/storage/v1/object/public/piquenique/tiffani2.jpeg">
+                <img class="slide"
+                    src="https://ezppwkfdinbqsxvzucdf.supabase.co/storage/v1/object/public/piquenique/tiffani3.jpeg">
+            </div>
+            <button class="cnav cprev" id="prevA">‹</button>
+            <button class="cnav cnext" id="nextA">›</button>
+            <div class="dots" id="dotsA"></div>
+        </div>
+        <div class="caption" id="capA"></div>
+
+        <div class="player">
+            <button class="pbtn" id="pbtn">▶</button>
+            <div class="pinfo">
+                <div class="plabel">Playlist da Tiffani</div>
+                <div class="ptrack" id="ptrack">Música 1</div>
+            </div>
+            <button class="pskip" id="pskip">⏭</button>
+        </div>
+
+        <div class="info-grid">
+            <div class="info">
+                <div class="info-label">Data</div>
+                <div class="info-value">01 de agosto</div>
+                <div class="info-sub">sexta-feira, 14h</div>
+            </div>
+            <div class="info">
+                <div class="info-label">Local</div>
+                <div class="info-value">Praça do Chafariz</div>
+                <div class="info-sub">Downtown, Barra</div>
+            </div>
+        </div>
+
+        <div class="sec-label">O local</div>
+        <div class="carousel">
+            <div class="slides" id="slidesB">
+                <img class="slide" src="https://ezppwkfdinbqsxvzucdf.supabase.co/storage/v1/object/public/piquenique/chafariz-2.jpg">
+                <img class="slide" src="https://ezppwkfdinbqsxvzucdf.supabase.co/storage/v1/object/public/piquenique/jafariz.jpg">
+                <img class="slide" src="https://ezppwkfdinbqsxvzucdf.supabase.co/storage/v1/object/public/piquenique/jardim-literario-2.jpg">
+                <img class="slide" src="https://ezppwkfdinbqsxvzucdf.supabase.co/storage/v1/object/public/piquenique/pet.jpg">
+                <img class="slide" src="https://ezppwkfdinbqsxvzucdf.supabase.co/storage/v1/object/public/piquenique/piqueniqueIMage.jpg">
+            </div>
+            <button class="cnav cprev" id="prevB">‹</button>
+            <button class="cnav cnext" id="nextB">›</button>
+            <div class="dots" id="dotsB"></div>
+        </div>
+        <div class="caption" id="capB"></div>
+
+        <div class="cd-label">Faltam</div>
+        <div class="countdown">
+            <div class="cd-box">
+                <div class="cd-num" id="cd-d">--</div>
+                <div class="cd-unit">dias</div>
+            </div>
+            <div class="cd-box">
+                <div class="cd-num" id="cd-h">--</div>
+                <div class="cd-unit">horas</div>
+            </div>
+            <div class="cd-box">
+                <div class="cd-num" id="cd-m">--</div>
+                <div class="cd-unit">min</div>
+            </div>
+        </div>
+
+        <div class="rsvp">
+            <div class="rsvp-title">Confirme sua presença</div>
+            <input id="nome" type="text" placeholder="Seu nome" autocomplete="name" />
+            <input id="whatsapp" type="tel" inputmode="tel" placeholder="Seu WhatsApp (com DDD)" autocomplete="tel" />
+            <div class="btn-row">
+                <button class="bsim" id="btnSim">Vou sim</button>
+                <button class="bnao" id="btnNao">Não vou</button>
+            </div>
+            <div class="msg" id="msg"></div>
+        </div>
+
+        <a class="map"
+            href="https://www.google.com/maps/search/?api=1&query=Downtown%20Barra%20da%20Tijuca&query_place_id=ChIJN1b2_brQmwARrEARJlQm7Fo"
+            target="_blank" rel="noopener">
+            <div class="map-icon">📍</div>
+            <div style="flex:1;">
+                <div class="map-title">Abrir no mapa</div>
+                <div class="map-sub">Downtown · Av. das Américas, 500</div>
+            </div>
+            <div style="color:var(--hint);">↗</div>
+        </a>
+    </div>
+
+    <audio id="audio"></audio>
+
+    <script>
+        var WEBHOOK = 'https://webhooks.lucasb2k.shop/webhook/aniversarioTiffani';
+
+        var PLAYLIST = [
+            { nome: 'Música 1', url: 'https://ezppwkfdinbqsxvzucdf.supabase.co/storage/v1/object/public/piquenique/musicaParabens.mp3' },
+            { nome: 'Música 2', url: '' },
+            { nome: 'Música 3', url: '' },
+            { nome: 'Música 4', url: '' },
+            { nome: 'Música 5', url: '' }
+        ];
+
+        var CAPS_A = ['', '', '', '', ''];
+        var CAPS_B = ['', '', '', '', ''];
+
+        var audio = document.getElementById('audio');
+        var pbtn = document.getElementById('pbtn');
+        var ptrack = document.getElementById('ptrack');
+        var cur = 0;
+        function loadTrack(i) {
+            cur = (i + PLAYLIST.length) % PLAYLIST.length; ptrack.textContent = PLAYLIST[cur].nome;
+            if (PLAYLIST[cur].url) { audio.src = PLAYLIST[cur].url; }
+        }
+        function play() { if (!PLAYLIST[cur].url) return; audio.play().then(function () { pbtn.textContent = '❘❘'; }).catch(function () { pbtn.textContent = '▶'; }); }
+        function pause() { audio.pause(); pbtn.textContent = '▶'; }
+        pbtn.onclick = function () { if (audio.paused) play(); else pause(); };
+        document.getElementById('pskip').onclick = function () { loadTrack(cur + 1); play(); };
+        audio.onended = function () { loadTrack(cur + 1); play(); };
+        loadTrack(0);
+
+        var gate = document.getElementById('gate');
+        var wrap = document.getElementById('wrap');
+        function openInvite() { gate.classList.add('hidden'); wrap.classList.add('show'); play(); }
+        document.getElementById('gateBtn').onclick = openInvite;
+        gate.addEventListener('click', openInvite);
+
+        window.addEventListener('load', function () {
+            if (PLAYLIST[cur].url) {
+                audio.play().then(function () {
+                    pbtn.textContent = '❘❘';
+                    setTimeout(function () { if (!gate.classList.contains('hidden')) { gate.classList.add('hidden'); wrap.classList.add('show'); } }, 400);
+                }).catch(function () { });
+            }
+        });
+
+        function setupCarousel(slidesId, dotsId, prevId, nextId, capId, caps) {
+            var slides = document.getElementById(slidesId);
+            var total = slides.children.length; var idx = 0;
+            var dotsBox = document.getElementById(dotsId);
+            var cap = document.getElementById(capId);
+            for (var i = 0; i < total; i++) {
+                var d = document.createElement('div'); d.className = 'dot' + (i === 0 ? ' on' : '');
+                (function (k) { d.onclick = function () { go(k); }; })(i); dotsBox.appendChild(d);
+            }
+            function go(n) {
+                idx = (n + total) % total; slides.style.transform = 'translateX(-' + (idx * 100) + '%)';
+                var ds = dotsBox.children; for (var j = 0; j < ds.length; j++)ds[j].className = 'dot' + (j === idx ? ' on' : '');
+                if (cap) cap.textContent = caps[idx] || '';
+            }
+            document.getElementById(prevId).onclick = function () { go(idx - 1); };
+            document.getElementById(nextId).onclick = function () { go(idx + 1); };
+            if (cap) cap.textContent = caps[0] || '';
+            return { next: function () { go(idx + 1); } };
+        }
+        var carA = setupCarousel('slidesA', 'dotsA', 'prevA', 'nextA', 'capA', CAPS_A);
+        var carB = setupCarousel('slidesB', 'dotsB', 'prevB', 'nextB', 'capB', CAPS_B);
+        setInterval(function () { if (wrap.classList.contains('show')) { carA.next(); carB.next(); } }, 5000);
+
+        var target = new Date(2026, 7, 1, 14, 0, 0);
+        function tick() {
+            var diff = target.getTime() - Date.now(); if (diff < 0) diff = 0;
+            document.getElementById('cd-d').textContent = Math.floor(diff / 86400000);
+            document.getElementById('cd-h').textContent = Math.floor((diff % 86400000) / 3600000);
+            document.getElementById('cd-m').textContent = Math.floor((diff % 3600000) / 60000);
+        }
+        tick(); setInterval(tick, 30000);
+
+        function rsvp(resposta) {
+            var msg = document.getElementById('msg');
+            var nome = document.getElementById('nome').value.trim();
+            var whatsapp = document.getElementById('whatsapp').value.trim();
+            if (!nome) { msg.textContent = 'Escreva seu nome primeiro :)'; msg.style.color = '#7c5cd6'; document.getElementById('nome').focus(); return; }
+            if (resposta === 'sim' && !whatsapp) { msg.textContent = 'Coloque seu WhatsApp pra gente combinar tudo :)'; msg.style.color = '#7c5cd6'; document.getElementById('whatsapp').focus(); return; }
+            if (resposta === 'sim') { msg.textContent = 'Que delícia, ' + nome + '! Mal posso esperar pra te ver lá 💜'; msg.style.color = '#5b3fa8'; }
+            else { msg.textContent = 'Que pena, ' + nome + '. Vou sentir sua falta.'; msg.style.color = '#7d7196'; }
+            fetch(WEBHOOK, {
+                method: 'POST', headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ nome: nome, whatsapp: whatsapp, resposta: resposta, evento: 'piquenique-tiffani', timestamp: new Date().toISOString() })
+            }).catch(function () { });
+        }
+        document.getElementById('btnSim').onclick = function () { rsvp('sim'); };
+        document.getElementById('btnNao').onclick = function () { rsvp('nao'); };
+    </script>
+</body>
+
+</html>
