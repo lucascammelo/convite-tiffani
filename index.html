@@ -305,7 +305,14 @@
         }
 
         .player {
-            display: none;
+            background: var(--card);
+            border: 1px solid var(--line);
+            border-radius: 16px;
+            padding: 14px 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin: 18px 0;
         }
 
         .pbtn {
@@ -594,10 +601,8 @@
         <div class="player">
             <button class="pbtn" id="pbtn">▶</button>
             <div class="pinfo">
-                <div class="plabel">Playlist da Tiffani</div>
-                <div class="ptrack" id="ptrack">Música 1</div>
+                <div class="plabel">Meu aniversário está chegando</div>
             </div>
-            <button class="pskip" id="pskip">⏭</button>
         </div>
 
         <div class="info-grid">
@@ -677,31 +682,18 @@
     <script>
         var WEBHOOK = 'https://webhooks.lucasb2k.shop/webhook/aniversarioTiffani';
 
-        var PLAYLIST = [
-            { nome: 'Música 1', url: 'https://ezppwkfdinbqsxvzucdf.supabase.co/storage/v1/object/public/piquenique/urso.mp3' },
-            { nome: 'Música 2', url: 'https://ezppwkfdinbqsxvzucdf.supabase.co/storage/v1/object/public/piquenique/urso.mp3' },
-            { nome: 'Música 3', url: 'https://ezppwkfdinbqsxvzucdf.supabase.co/storage/v1/object/public/piquenique/urso.mp3' },
-            { nome: 'Música 4', url: 'https://ezppwkfdinbqsxvzucdf.supabase.co/storage/v1/object/public/piquenique/urso.mp3' },
-            { nome: 'Música 5', url: 'https://ezppwkfdinbqsxvzucdf.supabase.co/storage/v1/object/public/piquenique/urso.mp3' }
-        ];
+        var MUSICA_URL = 'https://ezppwkfdinbqsxvzucdf.supabase.co/storage/v1/object/public/piquenique/urso.mp3';
 
         var CAPS_A = ['', '', '', '', ''];
         var CAPS_B = ['Um jardim em uma cidade: um respiro na rotina e o lazer para os dias de descanso.', 'Praça do Chafariz', 'A bike "Jardim Literário", localizada no City Garden (Praça do Chafariz) é uma ação para influenciar a leitura e a solidariedade em meio à natureza.', 'Leve sua criança para se divertir junto comigo', 'Cadeiras disponíveis, porém podem estar ocupadas.'];
 
         var audio = document.getElementById('audio');
         var pbtn = document.getElementById('pbtn');
-        var ptrack = document.getElementById('ptrack');
-        var cur = 0;
-        function loadTrack(i) {
-            cur = (i + PLAYLIST.length) % PLAYLIST.length; ptrack.textContent = PLAYLIST[cur].nome;
-            if (PLAYLIST[cur].url) { audio.src = PLAYLIST[cur].url; }
-        }
-        function play() { if (!PLAYLIST[cur].url) return; audio.play().then(function () { pbtn.textContent = '❘❘'; }).catch(function () { pbtn.textContent = '▶'; }); }
+        audio.loop = true;
+        audio.src = MUSICA_URL;
+        function play() { audio.play().then(function () { pbtn.textContent = '❘❘'; }).catch(function () { pbtn.textContent = '▶'; }); }
         function pause() { audio.pause(); pbtn.textContent = '▶'; }
         pbtn.onclick = function () { if (audio.paused) play(); else pause(); };
-        document.getElementById('pskip').onclick = function () { loadTrack(cur + 1); play(); };
-        audio.onended = function () { loadTrack(cur + 1); play(); };
-        loadTrack(0);
 
         var gate = document.getElementById('gate');
         var wrap = document.getElementById('wrap');
@@ -710,12 +702,10 @@
         gate.addEventListener('click', openInvite);
 
         window.addEventListener('load', function () {
-            if (PLAYLIST[cur].url) {
-                audio.play().then(function () {
-                    pbtn.textContent = '❘❘';
-                    setTimeout(function () { if (!gate.classList.contains('hidden')) { gate.classList.add('hidden'); wrap.classList.add('show'); } }, 400);
-                }).catch(function () { });
-            }
+            audio.play().then(function () {
+                pbtn.textContent = '❘❘';
+                setTimeout(function () { if (!gate.classList.contains('hidden')) { gate.classList.add('hidden'); wrap.classList.add('show'); } }, 400);
+            }).catch(function () { });
         });
 
         function setupCarousel(slidesId, dotsId, prevId, nextId, capId, caps) {
