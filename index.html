@@ -305,14 +305,7 @@
         }
 
         .player {
-            background: var(--card);
-            border: 1px solid var(--line);
-            border-radius: 16px;
-            padding: 14px 16px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin: 18px 0;
+            display: none;
         }
 
         .pbtn {
@@ -768,7 +761,7 @@
             var whatsapp = document.getElementById('whatsapp').value.trim();
             if (!nome) { msg.textContent = 'Escreva seu nome primeiro :)'; msg.style.color = '#a6810f'; document.getElementById('nome').focus(); return; }
             if (resposta === 'sim' && !whatsapp) { msg.textContent = 'Coloque seu WhatsApp pra gente combinar tudo :)'; msg.style.color = '#a6810f'; document.getElementById('whatsapp').focus(); return; }
-            if (resposta === 'sim') { msg.textContent = 'Que delícia, ' + nome + '! Mal posso esperar pra te ver lá 💜'; msg.style.color = '#8a6a0c'; }
+            if (resposta === 'sim') { msg.textContent = 'Te adicionei no grupo do whatsapp, ' + nome + '! Qualquer nova informações, irei colocar la 💜'; msg.style.color = '#8a6a0c'; }
             else { msg.textContent = 'Que pena, ' + nome + '. Vou sentir sua falta.'; msg.style.color = '#7d7196'; }
             fetch(WEBHOOK, {
                 method: 'POST', headers: { 'Content-Type': 'application/json' },
